@@ -1,0 +1,45 @@
+page_separation:
+  input: 'inference_input'
+  out: 'NO_DUMP'
+  left: '_01'
+  right: '_02'
+  single: '_00'
+  ext: '.jpg'
+  quality: 100
+  short: null
+  log: 'trim_pos.tsv'
+  weight_path: 'src/separate_pages_ssd/ssd_tools/weights.hdf5'
+  allow_invalid_num_output: True 
+  silence_tf_log: True
+page_deskew:
+  r_angle: 0
+  skew_max: 4.0
+  acc_deg: 0.1
+  method: 1
+  gray: 1.0
+  quality: 100
+  short: null
+  roi_w: 1.0
+  roi_h: 1.0
+layout_extraction:
+  config_path: 'src/ndl_layout/models/ndl_layout.py'
+  checkpoint_path: 'src/ndl_layout/models/epoch_50.pth'
+  device: 'cuda:0'
+  'score_thr': 0.3
+line_ocr:
+  char_list: 'src/text_recognition/models/mojilist_NDL.txt'
+  saved_model: 'src/text_recognition/models/ndlen64-mj1-synth1.pth'
+  accept_empty: True
+  batch_max_length: 100
+  batch_size: 100
+  character: None
+  imgW: 1200
+  workers: 1
+  xml: None
+  yield_block_pillar: True
+  yield_block_page_num: True
+  FeatureExtraction: 'ResNet'
+  Prediction: 'CTC'
+  PAD: True
+  SequenceModeling: 'None'
+  Transformation: 'None'
