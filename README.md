@@ -6,9 +6,13 @@ NDLOCRを利用して推論を実行するためのCLIです。
 ## 環境構築
 
 ### 1. リポジトリのクローン
-本リポジトリは、必要なソースコードをhttps://github.com/ndl-lab
-に存在する複数のリポジトリからsubmodule設定しています。
-リポジトリをclone する際は、次のコマンドを実行してください。
+本リポジトリはNDLOCRの処理を統合する機能のみを有しています。
+
+OCRを実現するための各機能はhttps://github.com/ndl-labに存在する複数のリポジトリに切り分けられており、
+
+本リポジトリとの間をsubmoduleで紐づけています。
+
+リポジトリをclone する際は、次のコマンドを実行すると、関連リポジトリを一度に取得することができます。
 ```
 git clone --recursive https://github.com/ndl-lab/ndlocr_cli
 ```
