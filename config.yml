@@ -22,13 +22,13 @@ page_deskew:
   roi_w: 1.0
   roi_h: 1.0
 layout_extraction:
-  config_path: 'src/ndl_layout/models/ndl_layout.py'
-  checkpoint_path: 'src/ndl_layout/models/epoch_50.pth'
+  config_path: 'src/ndl_layout/models/ndl_layout_config.py'
+  checkpoint_path: 'src/ndl_layout/models/epoch_140_all_eql_bt.pth'
   device: 'cuda:0'
   'score_thr': 0.3
 line_ocr:
   char_list: 'src/text_recognition/models/mojilist_NDL.txt'
-  saved_model: 'src/text_recognition/models/ndlen64-mj1-synth1.pth'
+  saved_model: 'src/text_recognition/models/ndlenfixed64-mj0-synth1.pth'
   accept_empty: True
   batch_max_length: 100
   batch_size: 100
