@@ -32,7 +32,7 @@ def help(ctx):
 @click.pass_context
 @click.argument('input_root')
 @click.argument('output_root')
-@click.option('-s', '--input_structure', type=click.Choice(['s', 'i', 't', 'w', 'f'], case_sensitive=True), default='w', help='Input directory structure type. s(single), i(intermediate_output), t(tosho_data), w(workstatin), and f(image_file).')
+@click.option('-s', '--input_structure', type=click.Choice(['s', 'i', 't', 'w', 'f'], case_sensitive=True), default='s', help='Input directory structure type. s(single), i(intermediate_output), t(tosho_data), w(workstation), and f(image_file).')
 @click.option('-p', '--proc_range', type=str, default='0..3', help='Inference process range to run. Default is "0..3".')
 @click.option('-c', '--config_file', type=str, default='config.yml', help='Configuration yml file for inference. Default is "config.yml".')
 @click.option('-i', '--save_image', type=bool, default=False, is_flag=True, help='Output result image file with text file.')
