@@ -1,34 +1,52 @@
 # NDLOCRプログラム用CLI
 NDLOCRを利用して推論を実行するためのCLIです。 
 
-本プログラムは、国立国会図書館が株式会社モルフォAIソリューションズに委託 
-して作成したものです。
+本プログラムは、国立国会図書館が株式会社モルフォAIソリューションズに委託して作成したものです。
  
-`docker`ディレクトリ配下のスクリプトでDocker環境の構築を行い、
-その中で`cli`ディレクトリ配下のスクリプトで実行します。  
+## 環境構築
 
-## ディレクトリ構成
+### 1. リポジトリのクローン
+本リポジトリは、必要なソースコードをhttps://github.com/ndl-lab内の複数のリポジトリからsubmodule設定しています。
+リポジトリをclone する際は、次のコマンドを実行してください。
+```
+git clone --recursive https://github.com/ndl-lab/ndlocr_cli
+```
+
+### 2. dockerのインストール
+https://docs.docker.com/engine/install/
+に従って、OS及びディストリビューションにあった方法でdockerをインストールしてください。
+
+### 3. dockerコンテナのビルド
+```
+cd ndlocr_cli
+sh ./docker/dockerbuild.sh
+```
+
+### 4. dockerコンテナの起動
+```
+cd ndlocr_cli
+sh ./docker/run_docker.sh
+```
+
+
+
+## 環境構築後のディレクトリ構成
 ```
 ndlocr_cli
 ├── main.py : メインとなるPythonスクリプト
-├── cli : CLIコマンド的に利用するPythonスクリプト
+├── cli : CLIコマンド的に利用するPythonスクリプトの格納されたディレクトリ
 ├── src : 各推論処理のソースコード用ディレクトリ
-│   ├── separate_pages_ssd : ノド元分割のソースコード
-│   ├── deskew_HT : 傾き補正のソースコード
-│   ├── ndl_layout : レイアウト抽出処理のソースコード
-│   └── text_recognition : 文字認識処理のソースコード
+│   ├── separate_pages_ssd : ノド元分割のソースコードの格納されたディレクトリ
+│   ├── deskew_HT : 傾き補正のソースコードの格納されたディレクトリ
+│   ├── ndl_layout : レイアウト抽出処理のソースコードの格納されたディレクトリ
+│   └── text_recognition : 文字認識処理のソースコードの格納されたディレクトリ
 ├── config.yml : サンプルの推論設定ファイル
-├── docker : Dockerによる環境作成のスクリプト類
+├── docker : Dockerによる環境作成のスクリプトの格納されたディレクトリ
 ├── README.md : このファイル
-└── requirements.txt : Python の必要パッケージリスト
+└── requirements.txt : 必要なPythonパッケージリスト
 ```
 
 ## チュートリアル
-### Dockerの生成と実行
-Dockerをビルドする前に、`src`ディレクトリ内に各推論処理のリポジトリを格納しておく必要があります。  
-その後、本リポジトリのトップで`./docker/dockerbuild.sh`を実行すると、
-`python:3.7.9-buster` イメージをベースとして、必要なパッケージをインストールした`ocr-cli-py37` というイメージをビルドします。  
-`docker images`コマンドでイメージが生成されたか確認できます。  
 イメージ生成後、`run_docker.sh`を実行することでDockerコンテナを起動できます。  
 起動後は以下のような`docker exec`コマンドを利用してコンテナにログインできます。
 
