@@ -122,7 +122,7 @@ input_root
  ├── xml
  │   └── R[7桁連番].xml※XMLデータ
  └── img
-     └── R[7桁連番]_pp.jp2※画像データ
+     └── R[7桁連番]_pp.jpg※画像データ
 ```
 
 - Image file mode（`-s f`で指定）
@@ -139,7 +139,7 @@ input_root
      ├── xml
      │   └── R[7桁連番].xml※XMLデータ
      └── img
-         └── R[7桁連番]_pp.jp2※画像データ   
+         └── R[7桁連番]_pp.jpg※画像データ   
 ```
 
 
