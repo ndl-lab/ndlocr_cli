@@ -31,7 +31,7 @@ sh ./docker/run_docker.sh
 
 
 
-## 環境構築後のディレクトリ構成
+### 環境構築後のディレクトリ構成（参考）
 ```
 ndlocr_cli
 ├── main.py : メインとなるPythonスクリプト
