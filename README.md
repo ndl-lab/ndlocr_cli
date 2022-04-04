@@ -6,7 +6,8 @@ NDLOCRを利用して推論を実行するためのCLIです。
 ## 環境構築
 
 ### 1. リポジトリのクローン
-本リポジトリは、必要なソースコードをhttps://github.com/ndl-lab内の複数のリポジトリからsubmodule設定しています。
+本リポジトリは、必要なソースコードをhttps://github.com/ndl-lab
+に存在する複数のリポジトリからsubmodule設定しています。
 リポジトリをclone する際は、次のコマンドを実行してください。
 ```
 git clone --recursive https://github.com/ndl-lab/ndlocr_cli
@@ -54,14 +55,14 @@ docker exec -i -t --user root ocr_cli_runner bash
 ```
 
 ### 推論処理の実行
-Workstation形式(後述)のinputディレクトリ構成であれば、以下のコマンドで実行することができます。
+single形式(inputディレクトリ直下にimgディレクトリが存在する)のinputディレクトリ構成であれば、以下のコマンドで実行することができます。
 ```
 python main.py infer sample_data output_dir
 ```
 
-single形式(inputディレクトリ直下にimgディレクトリが存在する)のinputディレクトリ構成であれば、以下のコマンドで実行することができます。
+single形式のinputディレクトリ構成であれば、以下のコマンドで実行することができます。
 ```
-python main.py infer sample_data output_dir -s s
+python main.py infer sample_data output_dir
 ```
 
 各部分の推論結果による中間出力を全てdumpする場合は`-d`オプションを追加してください。
@@ -112,11 +113,10 @@ python main.py infer sample_data output_dir -p 1..3 -s s
 
 ## 入出力仕様
 ### 入力ディレクトリについて
-入力ディレクトリの形式は以下の4パターンを想定しており、
+入力ディレクトリの形式は以下の3パターンを想定しており、
 それぞれ`-s`オプションで指定することができます。
-(デフォルトはWorkstation modeです)
 
-- Sigle input dir mode
+- Sigle input dir mode（`-s s`で指定）※デフォルト
 ```
 input_root
  ├── xml
@@ -125,7 +125,13 @@ input_root
      └── R[7桁連番]_pp.jp2※画像データ
 ```
 
-- Partial inference mode
+- Image file mode（`-s f`で指定）
+(単体の画像ファイルを入力として与える場合はこちら)
+```
+input_root(※画像データファイル)
+```
+
+- intermediate output mode（`-s i`で指定）
 (過去に実行した部分実行の結果を入力とする場合はこちら)
 ```
 input_root
@@ -136,29 +142,7 @@ input_root
          └── R[7桁連番]_pp.jp2※画像データ   
 ```
 
-- ToshoData mode
-```
-input_root
- └── tosho_19XX_bunkei
-     └── R[7桁連番]_pp.jp2※画像データ   
-```
 
-- Workstation mode
-```
-input_root
- └── workstation
-     └── [collect(3桁数字)、またはdigital(3桁数字)]フォルダ
-          └── [15桁連番]フォルダ※PID上1桁目
-               └── [3桁連番]フォルダ※PID上2～4桁目
-                    └── [3桁連番]フォルダ※PID上5～7桁目
-                         └── R[7桁連番]_contents.jp2※画像データ
-```
-
-- Image file mode
-(単体の画像ファイルを入力として与える場合はこちら)
-```
-input_root(※画像データファイル)
-```
 
 ### 出力ディレクトリについて
 ```
