@@ -64,12 +64,6 @@ single形式(inputディレクトリ直下にimgディレクトリが存在す�
 ```
 python main.py infer sample_data output_dir
 ```
-
-single形式のinputディレクトリ構成であれば、以下のコマンドで実行することができます。
-```
-python main.py infer sample_data output_dir
-```
-
 各部分の推論結果による中間出力を全てdumpする場合は`-d`オプションを追加してください。
 中間出力結果のファイルは出力ディレクトリ配下の`dump`ディレクトリに保存されます。
 (行認識のdumpでは認識された文字列の重畳は行われず、レイアウト認識と同じものが出力されます)
