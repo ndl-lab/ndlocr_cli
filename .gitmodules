@@ -1,0 +1,12 @@
+[submodule "src/separate_pages_ssd"]
+	path = src/separate_pages_ssd
+	url = https://github.com/ndl-lab/separate_pages_ssd.git
+[submodule "src/deskew_HT"]
+	path = src/deskew_HT
+	url = https://github.com/ndl-lab/deskew_HT.git
+[submodule "src/text_recognition"]
+	path = src/text_recognition
+	url = https://github.com/ndl-lab/text_recognition.git
+[submodule "src/ndl_layout"]
+	path = src/ndl_layout
+	url = https://github.com/ndl-lab/ndl_layout.git
