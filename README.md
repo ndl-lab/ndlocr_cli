@@ -21,18 +21,39 @@ OCRを実現するための各機能はhttps://github.com/ndl-lab
 ```
 git clone --recursive https://github.com/ndl-lab/ndlocr_cli
 ```
+### 2. ホストマシンのNVIDIA Driverのアップデート
+コンテナ内でCUDA 11.1を利用します。
 
-### 2. dockerのインストール
+ホストマシンのNVIDIA Driverが
+
+Linuxの場合: 455.23以上 
+
+Windowsの場合:456.38以上
+
+のバージョンを満たさない場合は、ご利用のGPUに対応するドライバの更新を行ってください。
+
+（参考情報）
+
+以下の環境で動作確認を行っています。
+
+OS: Ubuntu 18.04.5 LTS
+
+GPU: GeForce RTX 2080Ti
+
+NVIDIA Driver: 455.23.05
+
+
+### 3. dockerのインストール
 https://docs.docker.com/engine/install/
 に従って、OS及びディストリビューションにあった方法でdockerをインストールしてください。
 
-### 3. dockerコンテナのビルド
+### 4. dockerコンテナのビルド
 ```
 cd ndlocr_cli
 sh ./docker/dockerbuild.sh
 ```
 
-### 4. dockerコンテナの起動
+### 5. dockerコンテナの起動
 ```
 cd ndlocr_cli
 sh ./docker/run_docker.sh
