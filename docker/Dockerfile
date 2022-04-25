@@ -31,6 +31,6 @@ RUN set -x \
 RUN set -x && pip install torch==1.8.1+cu111 torchvision==0.9.1+cu111 -f https://download.pytorch.org/whl/lts/1.8/torch_lts.html
 RUN set -x && cd ${PROJECT_DIR}/src/ndl_layout/mmdetection && python setup.py bdist_wheel && pip install dist/*.whl
 ENV PYTHONPATH $PYTHONPATH:${PROJECT_DIR}/src/text_recognition/deep-text-recognition-benchmark
-RUN set -x && pip install mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.8.1/index.html
+RUN set -x && pip install mmcv-full==1.4.0 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.8.0/index.html
 
 WORKDIR ${PROJECT_DIR}
