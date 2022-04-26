@@ -136,7 +136,7 @@ python main.py infer sample_data output_dir -p 1..3 -s s
 
 重みファイルのパス等、各モジュールで利用する設定値は`config.yml`の内容を修正することで変更することができます。
 
-## 【Google Cloud Platformを利用する場合の参考情報】
+## 【Google Cloud Platformを利用する場合の参考事例】
 国立国会図書館非常勤調査員・東京大学史料編纂所の中村覚助教がGoogle Cloud Platform上での構築例と実行例をまとめたブログ記事を公開しています。
 
 https://zenn.dev/nakamura196/articles/1313a746826c36
