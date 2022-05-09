@@ -139,6 +139,7 @@ python main.py infer input_root output_dir -p 1..3 -s s
 
 ## 【Google Colaboratoryを利用する場合の参考事例】
 国立国会図書館非常勤調査員・東京大学史料編纂所の中村覚助教がGoogle Colaboratory上での実行例をまとめたブログ記事とノートブックを公開しています。
+
 https://zenn.dev/nakamura196/articles/b6712981af3384
 
 
