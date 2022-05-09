@@ -88,7 +88,7 @@ docker exec -i -t --user root ocr_cli_runner bash
 ### 推論処理の実行
 single形式(inputディレクトリ直下にimgディレクトリが存在する)のinputディレクトリ構成であれば、以下のコマンドで実行することができます。
 ```
-python main.py infer sample_data output_dir
+python main.py infer input_root output_dir
 ```
 各部分の推論結果による中間出力を全てdumpする場合は`-d`オプションを追加してください。
 中間出力結果のファイルは出力ディレクトリ配下の`dump`ディレクトリに保存されます。
@@ -119,12 +119,12 @@ output_dir/
 入力形式によらず、推論処理の部分実行を行うときは`-p`オプションを利用します。
 例えば[ノド元分割]から[レイアウト抽出]までを実行する場合は次のコマンドとなります。
 ```
-python main.py infer sample_data output_dir -p 0..2 -s s
+python main.py infer input_root output_dir -p 0..2 -s s
 ```
 
 **既にページ単位の画像になっている等、ノド元分割が不要の場合は[傾き補正]から[文字認識(OCR)]までを実行すればよく、次のコマンドとなります。**
 ```
-python main.py infer sample_data output_dir -p 1..3 -s s
+python main.py infer input_root output_dir -p 1..3 -s s
 ```
 
 `-p`の番号と処理の内容の対応関係は次の通りです。
@@ -136,10 +136,17 @@ python main.py infer sample_data output_dir -p 1..3 -s s
 
 重みファイルのパス等、各モジュールで利用する設定値は`config.yml`の内容を修正することで変更することができます。
 
+
+## 【Google Colaboratoryを利用する場合の参考事例】
+国立国会図書館非常勤調査員・東京大学史料編纂所の中村覚助教がGoogle Colaboratory上での実行例をまとめたブログ記事とノートブックを公開しています。
+https://zenn.dev/nakamura196/articles/b6712981af3384
+
+
 ## 【Google Cloud Platformを利用する場合の参考事例】
 国立国会図書館非常勤調査員・東京大学史料編纂所の中村覚助教がGoogle Cloud Platform上での構築例と実行例をまとめたブログ記事を公開しています。
 
 https://zenn.dev/nakamura196/articles/1313a746826c36
+
 
 
 
