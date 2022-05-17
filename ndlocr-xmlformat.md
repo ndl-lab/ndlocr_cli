@@ -1,8 +1,8 @@
-# NDLOCRが出力するXMLの形式について
+# NDLOCRが出力するXMLの形式についてCancel changes
 
 処理完了後、出力されるXMLは入力ページ毎に<PAGE>要素を持ち、この階層の下に、LINE要素及びBLOCK要素を持つ。
 
-PAGE要素は「当該画像の高さ(HEIGHT)」及び「当該画像の幅(WIDTH)」のattributeを持つ。
+PAGE要素は「当該画像の高さ(HEIGHT)」及び「当該画像の幅(WIDTH)」を属性に持つ。
 
 
 LINE要素及びBLOCK要素は、「当該領域の高さ(HEIGHT)」「当該領域の幅(WIDTH)」「当該領域の左上x座標(X)」「当該領域の左上y座標(Y)」「予測の確信度(CONF)」「レイアウト種別(TYPE)」を属性に持つ。
