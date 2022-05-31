@@ -5,6 +5,7 @@ natsort==7.1.1
 nltk==3.6.2
 numpy==1.19.5
 opencv-python==4.5.1.48
+protobuf==3.20.0
 pyyaml
 scikit-image==0.16.2
 scipy==1.1.0
