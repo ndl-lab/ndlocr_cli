@@ -77,7 +77,8 @@ class LineOcrProcess(BaseInferenceProcess):
         result_xml = self._run_src_inference(input_data['img'], input_data['xml'],
                                              accept_empty=self.cfg['line_ocr']['accept_empty'],
                                              yield_block_page_num=self.cfg['line_ocr']['yield_block_page_num'],
-                                             yield_block_pillar=self.cfg['line_ocr']['yield_block_pillar'])
+                                             yield_block_pillar=self.cfg['line_ocr']['yield_block_pillar'],
+                                             yield_block_rubi=self.cfg['line_ocr']['yield_block_rubi'])
 
         output_data = copy.deepcopy(input_data)
         output_data['xml'] = result_xml
