@@ -38,6 +38,7 @@ line_ocr:
   xml: None
   yield_block_pillar: True
   yield_block_page_num: True
+  yield_block_rubi: False
   FeatureExtraction: 'ResNet'
   Prediction: 'CTC'
   PAD: True
