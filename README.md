@@ -48,18 +48,30 @@ https://docs.docker.com/engine/install/
 に従って、OS及びディストリビューションにあった方法でdockerをインストールしてください。
 
 ### 4. dockerコンテナのビルド
+Linux:
 ```
 cd ndlocr_cli
 sh ./docker/dockerbuild.sh
 ```
 
+Windows:
+```
+cd ndlocr_cli
+docker\dockerbuild.bat
+```
+
 ### 5. dockerコンテナの起動
+Linux:
 ```
 cd ndlocr_cli
 sh ./docker/run_docker.sh
 ```
 
-
+Windows:
+```
+cd ndlocr_cli
+docker\run_docker.bat
+```
 
 ### 環境構築後のディレクトリ構成（参考）
 ```
