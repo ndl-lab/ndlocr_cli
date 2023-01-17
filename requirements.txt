@@ -3,7 +3,7 @@ keras==2.2.4
 lmdb==1.2.1
 natsort==7.1.1
 nltk==3.6.2
-numpy==1.24.1
+numpy==1.21.6
 opencv-python==4.5.1.48
 protobuf==3.20.0
 pyyaml
