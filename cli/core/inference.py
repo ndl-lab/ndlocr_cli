@@ -253,7 +253,7 @@ class OcrInferencer:
             print('[ERROR] Unexpected input directory structure type: {}.'.format(self.cfg['input_structure']), file=sys.stderr)
             return None
 
-        # output directory existance check
+        # output directory existence check
         output_dir = utils.mkdir_with_duplication_check(output_dir)
         single_dir_data['output_dir'] = output_dir
 
@@ -293,7 +293,7 @@ class OcrInferencer:
             # prepare output dir for inferensce result with this input dir
             output_dir = os.path.join(self.cfg['output_root'], pid)
 
-            # output directory existance check
+            # output directory existence check
             os.makedirs(output_dir, exist_ok=True)
             single_dir_data['output_dir'] = output_dir
             single_dir_data_list.append(single_dir_data)
