@@ -9,7 +9,7 @@ pyyaml
 scikit-image==0.16.2
 scipy==1.7.3
 tensorboard==2.9.0
-tensorflow==2.9.3
+tensorflow-cpu==2.9.3
 keras==2.9.0
 tensorflow-estimator==2.9.0
 wheel
