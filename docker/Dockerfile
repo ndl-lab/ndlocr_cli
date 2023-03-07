@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cuda:11.1.1-cudnn8-devel-ubuntu18.04
+FROM nvcr.io/nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
 
 ENV PROJECT_DIR=/root/ocr_cli
 ENV FORCE_CUDA="1"
