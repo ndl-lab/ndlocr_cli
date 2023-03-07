@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cuda:11.1.1-cudnn8-devel-ubuntu18.04
+FROM nvcr.io/nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
 
 ENV PROJECT_DIR=/root/ocr_cli
 ENV FORCE_CUDA="1"
@@ -21,8 +21,8 @@ RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
 
 RUN set -x && apt -y install libgl1-mesa-dev libglib2.0-0 git
 RUN set -x \
-    && apt -y install python3.7 python3.7-dev \
-    && ln -s /usr/bin/python3.7 /usr/bin/python \
+    && apt -y install python3.8 python3.8-dev \
+    && ln -s /usr/bin/python3.8 /usr/bin/python \
     && apt -y install wget python3-distutils && wget https://bootstrap.pypa.io/get-pip.py && python get-pip.py
 
 COPY . ${PROJECT_DIR}
