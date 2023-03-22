@@ -60,7 +60,20 @@ cd ndlocr_cli
 docker\dockerbuild.bat
 ```
 
-### 5. dockerコンテナの起動
+### 5. 処理したい画像の入ったディレクトリのマウント方法
+
+[./docker/run_docker.sh](./docker/run_docker.sh)を書き換えて、-vを追加してホストマシンのディレクトリを指定することでホストマシンのディレクトリをマウントすることができます。
+（※-vオプションは-iオプションよりも手前で指定してください。）
+
+Linux:
+
+例：/home/user/tmpdirの直下に画像ファイルがある場合
+```
+docker run --gpus all -d --rm --name ocr_cli_runner -v /home/user/tmpdir:/root/tmpdir/img -i ocr-cli-py37:latest
+```
+
+
+### 6. dockerコンテナの起動
 Linux:
 ```
 cd ndlocr_cli
