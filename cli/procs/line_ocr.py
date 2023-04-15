@@ -27,9 +27,11 @@ class LineOcrProcess(BaseInferenceProcess):
             実行される順序を表す数値。
         """
         super().__init__(cfg, pid, '_line_ocr')
-        process1 = subprocess.Popen(['cat', self.cfg['line_ocr']['char_list']], stdout=subprocess.PIPE)
-        process2 = subprocess.Popen(['tr', '-d', '\\n'], stdin=process1.stdout, stdout=subprocess.PIPE)
-        self.character = '〓' + process2.stdout.read().decode()
+
+        char_list_filename = self.cfg['line_ocr']['char_list']
+        with open(char_list_filename, encoding='utf-8') as f:
+            lines = f.read().splitlines()
+            self.character = '〓' + ''.join(lines)
 
         from src.text_recognition.text_recognition import InferencerWithCLI
         self._inferencer = InferencerWithCLI(self.cfg['line_ocr'], self.character)
