@@ -9,4 +9,4 @@
 	url = https://github.com/ndl-lab/text_recognition.git
 [submodule "src/ndl_layout"]
 	path = src/ndl_layout
-	url = https://github.com/ndl-lab/ndl_layout.git
+	url = https://github.com/syoyo/ndl_layout.git
