@@ -521,10 +521,11 @@ class OcrInferencer:
         cap_txt = ''
         for page_xml in xml_data.iter('PAGE'):
             for line_xml in page_xml.iter('LINE'):
-                main_txt += line_xml.attrib['STRING']
-                main_txt += '\n'
-                if line_xml.attrib['TYPE'] == 'キャプション':
-                    cap_txt += line_xml.attrib['STRING']
-                    cap_txt += '\n'
+                if 'STRING' in line_xml.attrib:
+                    main_txt += line_xml.attrib['STRING']
+                    main_txt += '\n'
+                    if line_xml.attrib['TYPE'] == 'キャプション':
+                        cap_txt += line_xml.attrib['STRING']
+                        cap_txt += '\n'
 
         return main_txt, cap_txt
