@@ -4,7 +4,7 @@ natsort==7.1.1
 nltk==3.6.6
 numpy==1.22.4
 opencv-python==4.6.0.66
-protobuf==4.23.2
+protobuf==3.19.6
 pyyaml
 scipy==1.7.3
 tensorboard==2.9.0
