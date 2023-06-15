@@ -6,7 +6,7 @@ numpy==1.22.4
 opencv-python==4.6.0.66
 protobuf==3.19.6
 pyyaml
-scikit-image==0.21.0
+scikit-image
 scipy==1.7.3
 tensorboard==2.9.0
 tensorflow-cpu==2.9.3
