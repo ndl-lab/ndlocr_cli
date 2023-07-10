@@ -7,11 +7,11 @@ NDLOCRを利用してテキスト化を実行するためのアプリケーシ�
 [LICENSE](./LICENSE
 )をご覧ください。
 
-**本プログラムに対して追加開発を行った令和4年度NDLOCR追加開発事業の成果物である[ver.2.0](https://github.com/ndl-lab/ndlocr_cli_r4/tree/ver.2.0)**
+**本プログラムに対して追加開発を行った令和4年度NDLOCR追加開発事業の成果物である[NDLOCR ver.2.0](https://github.com/ndl-lab/ndlocr_cli_r4/tree/ver.2.0)**
 
 及び
 
-**ver.2.0をもとに国立国会図書館が更に改善を行ったプログラム[ver.2.1](https://github.com/ndl-lab/)についても提供しています。**
+**ver.2.0をもとに国立国会図書館が更に改善を行った[NDLOCR ver.2.1](https://github.com/ndl-lab/)についても提供しています。**
 
  
 ## 環境構築
