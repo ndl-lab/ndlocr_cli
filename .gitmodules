@@ -10,3 +10,23 @@
 [submodule "src/ndl_layout"]
 	path = src/ndl_layout
 	url = https://github.com/ndl-lab/ndl_layout.git
+[submodule "submodules/ndl_layout"]
+	path = submodules/ndl_layout
+	url = git@github.com:ndl-lab/ndl_layout.git
+	branch = ver.2.0
+[submodule "submodules/separate_pages_mmdet"]
+	path = submodules/separate_pages_mmdet
+	url = git@github.com:ndl-lab/separate_pages_mmdet.git
+	branch = master
+[submodule "submodules/text_recognition_lightning"]
+	path = submodules/text_recognition_lightning
+	url = git@github.com:ndl-lab/text_recognition_lightning.git
+	branch = master
+[submodule "submodules/reading_order"]
+	path = submodules/reading_order
+	url = git@github.com:ndl-lab/reading_order.git
+	branch = ver.2.0
+[submodule "submodules/ruby_prediction"]
+	path = submodules/ruby_prediction
+	url = git@github.com:ndl-lab/ruby_prediction.git
+	branch = master
