@@ -30,3 +30,7 @@
 	path = submodules/ruby_prediction
 	url = git@github.com:ndl-lab/ruby_prediction.git
 	branch = master
+[submodule "submodules/deskew_HT"]
+	path = submodules/deskew_HT
+	url = git@github.com:ndl-lab/deskew_HT.git
+	branch = master
