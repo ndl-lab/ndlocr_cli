@@ -10,10 +10,6 @@
 [submodule "src/ndl_layout"]
 	path = src/ndl_layout
 	url = https://github.com/ndl-lab/ndl_layout.git
-[submodule "submodules/ndl_layout"]
-	path = submodules/ndl_layout
-	url = git@github.com:ndl-lab/ndl_layout.git
-	branch = ver.2.0
 [submodule "submodules/separate_pages_mmdet"]
 	path = submodules/separate_pages_mmdet
 	url = git@github.com:ndl-lab/separate_pages_mmdet.git
@@ -30,3 +26,11 @@
 	path = submodules/ruby_prediction
 	url = git@github.com:ndl-lab/ruby_prediction.git
 	branch = master
+[submodule "submodules/deskew_HT"]
+	path = submodules/deskew_HT
+	url = git@github.com:ndl-lab/deskew_HT.git
+	branch = master
+[submodule "submodules/ndl_layout"]
+	path = submodules/ndl_layout
+	url = git@github.com:ndl-lab/ndl_layout.git
+	branch = ver.2.0
