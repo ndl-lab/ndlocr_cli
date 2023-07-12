@@ -22,7 +22,7 @@ page_deskew:
   roi_h: 1.0
 layout_extraction:
   config_path: 'submodules/ndl_layout/models/cascade_mask_rcnn_convnext-t_p4_w7_fpn_giou_4conv1f_fp16_ms-crop_3x_coco.py'
-  checkpoint_path: 'submodules/ndl_layout/models/ndl_retrainmodel.pth'
+  checkpoint_path: 'submodules/ndl_layout/models/epoch_375.pth'
   device: 'cuda:0'
   score_thr: 0.3
 line_ocr:
