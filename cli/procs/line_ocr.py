@@ -1,12 +1,9 @@
-# Copyright (c) 2022, National Diet Library, Japan
+# Copyright (c) 2023, National Diet Library, Japan
 #
 # This software is released under the CC BY 4.0.
 # https://creativecommons.org/licenses/by/4.0/
-
-
-import copy
+import hydra
 import numpy
-import subprocess
 import xml.etree.ElementTree as ET
 
 from .base_proc import BaseInferenceProcess
@@ -27,13 +24,33 @@ class LineOcrProcess(BaseInferenceProcess):
             実行される順序を表す数値。
         """
         super().__init__(cfg, pid, '_line_ocr')
-        process1 = subprocess.Popen(['cat', self.cfg['line_ocr']['char_list']], stdout=subprocess.PIPE)
-        process2 = subprocess.Popen(['tr', '-d', '\\n'], stdin=process1.stdout, stdout=subprocess.PIPE)
-        self.character = '〓' + process2.stdout.read().decode()
+        from submodules.text_recognition_lightning.src.tasks.infer_task import infer, create_object_dict
+        self._run_submodule_inference = infer
 
-        from src.text_recognition.text_recognition import InferencerWithCLI
-        self._inferencer = InferencerWithCLI(self.cfg['line_ocr'], self.character)
-        self._run_src_inference = self._inferencer.inference_wich_cli
+        config_path = "../../submodules/text_recognition_lightning/configs"
+        hydra.initialize(version_base="1.2", config_path=config_path)
+        self._hydra_cfg = hydra.compose(config_name="infer", overrides=[f"paths.output_dir={cfg['output_root']}"])
+        self._hydra_cfg['model']['character_file'] = cfg['line_ocr']['char_list']
+        self._hydra_cfg['ckpt_path'] = cfg['line_ocr']['saved_model']
+        self._hydra_cfg = self._remove_noise_elements(self._hydra_cfg)
+        for element_type, add_flag in cfg['line_ocr']['additional_elements'].items():
+            if add_flag:
+                add_block_string = f'BLOCK[@TYPE="{element_type}"]'
+                self._hydra_cfg['datamodule']['additional_elements'].append(add_block_string)
+        from pathlib import Path
+        hydra.core.utils._save_config(self._hydra_cfg, "config.yaml", Path(cfg['output_root'])/".text_recognition")
+
+        self._object_dict = create_object_dict(self._hydra_cfg)
+
+    def _remove_noise_elements(self, hydra_cfg):
+        NOISE_ELEMENT_TYPE = ['ノンブル', '柱']
+
+        for element_type in NOISE_ELEMENT_TYPE:
+            for idx, value in enumerate(hydra_cfg['datamodule']['additional_elements']):
+                if value == f'BLOCK[@TYPE="{element_type}"]':
+                    hydra_cfg['datamodule']['additional_elements'].pop(idx)
+                    break
+        return hydra_cfg
 
     def _is_valid_input(self, input_data):
         """
@@ -73,15 +90,9 @@ class LineOcrProcess(BaseInferenceProcess):
             基本的にinput_dataと同じ構造です。
         """
         result = []
-        print('### Line OCR Process ###')
-        result_xml = self._run_src_inference(input_data['img'], input_data['xml'],
-                                             accept_empty=self.cfg['line_ocr']['accept_empty'],
-                                             yield_block_page_num=self.cfg['line_ocr']['yield_block_page_num'],
-                                             yield_block_pillar=self.cfg['line_ocr']['yield_block_pillar'],
-                                             yield_block_rubi=self.cfg['line_ocr']['yield_block_rubi'])
 
-        output_data = copy.deepcopy(input_data)
-        output_data['xml'] = result_xml
+        print('### Line OCR Process ###')
+        output_data = self._run_submodule_inference(self._object_dict, input_data)
         result.append(output_data)
 
         return result

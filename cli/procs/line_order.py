@@ -2,17 +2,15 @@
 #
 # This software is released under the CC BY 4.0.
 # https://creativecommons.org/licenses/by/4.0/
-
-
-import copy
 import numpy
+import xml.etree.ElementTree as ET
 
 from .base_proc import BaseInferenceProcess
 
 
-class PageDeskewProcess(BaseInferenceProcess):
+class LineOrderProcess(BaseInferenceProcess):
     """
-    傾き補正を実行するプロセスのクラス。
+    読み順認識推論を実行するプロセスのクラス。
     BaseInferenceProcessを継承しています。
     """
     def __init__(self, cfg, pid):
@@ -24,20 +22,9 @@ class PageDeskewProcess(BaseInferenceProcess):
         pid : int
             実行される順序を表す数値。
         """
-        super().__init__(cfg, pid, '_page_deskew')
-        from submodules.deskew_HT.alyn3.deskew import Deskew
-        self.deskewer = Deskew('', '',
-                               r_angle=cfg['page_deskew']['r_angle'],
-                               skew_max=cfg['page_deskew']['skew_max'],
-                               acc_deg=cfg['page_deskew']['acc_deg'],
-                               method=cfg['page_deskew']['method'],
-                               gray=cfg['page_deskew']['gray'],
-                               quality=cfg['page_deskew']['quality'],
-                               short=cfg['page_deskew']['short'],
-                               roi_w=cfg['page_deskew']['roi_w'],
-                               roi_h=cfg['page_deskew']['roi_h'])
-        self._run_submodule_inference = self.deskewer.deskew_on_memory
-
+        super().__init__(cfg, pid, '_line_order')
+        from submodules.reading_order.tools.eval import infer_with_cli
+        self._run_submodule_inference = infer_with_cli
 
     def _is_valid_input(self, input_data):
         """
@@ -51,10 +38,13 @@ class PageDeskewProcess(BaseInferenceProcess):
         Returns
         -------
         [変数なし] : bool
-            　入力データが正しければTrue, そうでなければFalseを返します。
+            入力データが正しければTrue, そうでなければFalseを返します。
         """
         if type(input_data['img']) is not numpy.ndarray:
-            print('PageDeskewProcess: input img is not numpy.ndarray')
+            print('LineOcrProcess: input img is not numpy.ndarray')
+            return False
+        if type(input_data['xml']) is not ET.ElementTree:
+            print('LineOcrProcess: input xml is not ElementTree')
             return False
         return True
 
@@ -73,13 +63,10 @@ class PageDeskewProcess(BaseInferenceProcess):
             推論処理の結果を保持する辞書型データ。
             基本的にinput_dataと同じ構造です。
         """
-        print('### Page Deskew Process ###')
-        inference_output = self._run_submodule_inference(input_data['img'])
-
-        # Create result to pass img_path and img data
         result = []
-        output_data = copy.deepcopy(input_data)
-        output_data['img'] = inference_output
+
+        print('### Line Order Process ###')
+        output_data = self._run_submodule_inference(input_data)
         result.append(output_data)
 
         return result

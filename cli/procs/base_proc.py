@@ -1,4 +1,4 @@
-# Copyright (c) 2022, National Diet Library, Japan
+# Copyright (c) 2023, National Diet Library, Japan
 #
 # This software is released under the CC BY 4.0.
 # https://creativecommons.org/licenses/by/4.0/
@@ -21,18 +21,18 @@ class BaseInferenceProcess:
     cfg : dict
         本推論実行における設定情報です。
     """
-    def __init__(self, cfg, pid, proc_type='_base_prep'):
+    def __init__(self, cfg, proc_id, proc_type='_base_prep'):
         """
         Parameters
         ----------
         cfg : dict
             本実行処理における設定情報です。
-        pid : int
-            実行される順序を表す数値。
+        proc_id : int, str
+            実行される順序を表す数値または文字列。
         proc_type : str
             クラスごとに定義されている処理名。
         """
-        self.proc_name = str(pid) + proc_type
+        self.proc_name = str(proc_id) + proc_type
 
         if not self._is_valid_cfg(cfg):
             raise ValueError('Configuration validation error.')
@@ -45,7 +45,7 @@ class BaseInferenceProcess:
 
     def do(self, data_idx, input_data):
         """
-        推論処理を実行する際にOcrInferencerクラスから呼び出される推論実行関数。
+        推論処理を実行する際にOcrInferrerクラスから呼び出される推論実行関数。
         入力データのバリデーションや推論処理、推論結果の保存などが含まれます。
         本処理は基本的に継承先では変更されないことを想定しています。
 
@@ -164,6 +164,8 @@ class BaseInferenceProcess:
             if 'txt' in single_result.keys() and single_result['txt'] is not None:
                 dump_txt_name = os.path.basename(input_data['img_path']).split('.')[0] + '_' + str(data_idx) + '_' + str(i) + '.txt'
                 self._dump_txt_result(single_result, input_data['output_dir'], dump_txt_name)
+            if 'ruby_txt' in single_result.keys() and single_result['ruby_txt'] is not None:
+                self._dump_ruby_txt_result(single_result, input_data['output_dir'], os.path.basename(input_data['img_path']))
         return
 
     def _dump_img_result(self, single_result, output_dir, img_name):
@@ -249,6 +251,35 @@ class BaseInferenceProcess:
 
         return
 
+    def _dump_ruby_txt_result(self, single_result, output_dir, img_name):
+        """
+        本クラスの推論処理結果(ルビテキスト)をファイルに保存します。
+        dumpフラグが有効の場合にのみ実行されます。
+
+        Parameters
+        ----------
+        single_result : dict
+            推論処理の結果を保持する辞書型データ。
+        output_dir : str
+            推論結果が保存されるディレクトリのパス。
+        img_name : str
+            入力データの画像ファイル名。
+            dumpされるテキストファイルのファイル名は入力のファイル名とほぼ同名（拡張子の変更、サフィックスや連番の追加のみ）となります。
+        """
+        txt_dir = os.path.join(self.process_dump_dir, 'txt')
+        os.makedirs(txt_dir, exist_ok=True)
+
+        trum, _ = os.path.splitext(img_name)
+        txt_path = os.path.join(txt_dir, trum + '_ruby.txt')
+        try:
+            with open(txt_path, 'w') as f:
+                f.write(single_result['ruby_txt'])
+        except OSError as err:
+            print("Dump text save error: {0}".format(err))
+            raise OSError
+
+        return
+
     def _create_result_image(self, single_result):
         """
         推論結果を入力の画像に重畳した画像データを生成します。
@@ -264,7 +295,7 @@ class BaseInferenceProcess:
         else:
             dump_img = copy.deepcopy(single_result['img'])
         if 'xml' in single_result.keys() and single_result['xml'] is not None:
-            # draw single inferenceresult on input image
+            # draw single inference result on input image
             # this should be implemeted in each child class
             cv2.putText(dump_img, 'dump' + self.proc_name, (0, 50),
                         cv2.FONT_HERSHEY_PLAIN, 4, (255, 0, 0), 5, cv2.LINE_AA)

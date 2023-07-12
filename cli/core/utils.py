@@ -1,4 +1,4 @@
-# Copyright (c) 2022, National Diet Library, Japan
+# Copyright (c) 2023, National Diet Library, Japan
 #
 # This software is released under the CC BY 4.0.
 # https://creativecommons.org/licenses/by/4.0/
@@ -51,6 +51,8 @@ def parse_cfg(cfg_dict):
     # parse start/end indices of inference process
     start = int(infer_cfg['proc_range'][0])
     end = int(infer_cfg['proc_range'][-1])
+    if (start < 0) or (end > 3):
+        print('[ERROR] Value of proc_range must be 0 ~ 3.', file=sys.stderr)
     if start > end:
         print('[ERROR] Value of proc_range must be [x..y : x <= y] .', file=sys.stderr)
         return None
@@ -68,7 +70,7 @@ def parse_cfg(cfg_dict):
     infer_cfg['input_root'] = os.path.abspath(infer_cfg['input_root'])
     infer_cfg['output_root'] = os.path.abspath(infer_cfg['output_root'])
     if infer_cfg['input_structure'] in ['s']:
-        # - Sigle input dir mode
+        # - Single input dir mode
         # input_root
         #  ├── xml
         #  │   └── R[7桁連番].xml※XMLデータ
@@ -79,7 +81,7 @@ def parse_cfg(cfg_dict):
         if not os.path.isdir(os.path.join(infer_cfg['input_root'], 'img')):
             print('[ERROR] Input img diretctory not found in {}'.format(infer_cfg['input_root']), file=sys.stderr)
             return None
-        if (start > 2) and (not os.path.isdir(os.path.join(infer_cfg['input_root'], 'xml'))):
+        if ((start > 2) or infer_cfg['ruby_only']) and (not os.path.isdir(os.path.join(infer_cfg['input_root'], 'xml'))):
             print('[ERROR] Input xml diretctory not found in {}'.format(infer_cfg['input_root']), file=sys.stderr)
             return None
         infer_cfg['input_dirs'] = [infer_cfg['input_root']]
@@ -94,10 +96,10 @@ def parse_cfg(cfg_dict):
         infer_cfg['input_dirs'] = []
         for input_dir in glob.glob(os.path.join(infer_cfg['input_root'], '*')):
             if os.path.isdir(input_dir):
-                if not os.path.isdir(os.path.join(input_dir, 'img')):
+                if not os.path.isdir(os.path.join(input_dir, 'img')) and not infer_cfg['ruby_only']:
                     print('[WARNING] Input directory {0} is skipped(no img diretctory)'.format(input_dir))
                     continue
-                if (start > 1) and (not os.path.isdir(os.path.join(input_dir, 'xml'))):
+                if ((start > 2) or infer_cfg['ruby_only']) and (not os.path.isdir(os.path.join(input_dir, 'xml'))):
                     print('[WARNING] Input directory {0} is skipped(no xml diretctory)'.format(input_dir))
                     continue
                 infer_cfg['input_dirs'].append(input_dir)
@@ -106,6 +108,9 @@ def parse_cfg(cfg_dict):
         # input_root
         #  └── tosho_19XX_bunkei
         #      └── R[7桁連番]_pp.jp2※画像データ
+        if infer_cfg['ruby_only']:
+            print('[ERROR] Ruby only mode is not supported when input structure is ToshoData mode')
+            return None
         infer_cfg['input_dirs'] = []
         for input_dir in glob.glob(os.path.join(infer_cfg['input_root'], '*')):
             if os.path.isdir(input_dir):
@@ -140,6 +145,10 @@ def parse_cfg(cfg_dict):
                 ret_list.extend(tmp_list)
             return ret_list
 
+        if infer_cfg['ruby_only']:
+            print('[ERROR] Ruby only mode is not supported when input structure is Work station mode')
+            return None
+
         # check if workstation directory exist
         work_dir = os.path.join(infer_cfg['input_root'], 'workstation')
         if not os.path.isdir(work_dir):
@@ -157,6 +166,68 @@ def parse_cfg(cfg_dict):
         return None
 
     return infer_cfg
+
+
+def parse_eval_cfg(cfg_dict):
+    """
+    コマンドで入力された引数やオプションをevaluationの内部関数が利用しやすい形にparseします。
+
+    Parameters
+    ----------
+    cfg_dict : dict
+        コマンドで入力された引数やオプションが保存された辞書型データ。
+
+    Returns
+    -------
+    eval_cfg : dict
+        評価処理を実行するための設定情報が保存された辞書型データ。
+    """
+    eval_cfg = copy.deepcopy(cfg_dict)
+
+    # add inference config parameters from yml config file
+    yml_config = None
+    if not os.path.isfile(cfg_dict['config_file']):
+        print('[ERROR] Config yml file not found.', file=sys.stderr)
+        return None
+
+    with open(cfg_dict['config_file'], 'r') as yml:
+        yml_config = yaml.safe_load(yml)
+
+    if type(yml_config) is not dict:
+        print('[ERROR] Config yml file read error.', file=sys.stderr)
+        return None
+
+    eval_cfg.update(yml_config)
+
+    # create input_dirs from input_root
+    # input_dirs is list of dirs that contain img (and xml) dir
+    eval_cfg['input_pred_data'] = os.path.abspath(eval_cfg['input_pred_data'])
+    eval_cfg['input_gt_data'] = os.path.abspath(eval_cfg['input_gt_data'])
+    eval_cfg['output_root_dir'] = os.path.abspath(eval_cfg['output_root_dir'])
+    if eval_cfg['input_structure'] in ['s']:
+        # - Sigle file input mode
+        # validation check for input file
+        for input_data in [eval_cfg['input_pred_data'], eval_cfg['input_gt_data']]:
+            if not os.path.isfile(input_data):
+                print('[ERROR] Input xml file not found in {}'.format(input_data), file=sys.stderr)
+                return None
+    elif eval_cfg['input_structure'] in ['d']:
+        # - Directory input mode
+        # input_data
+        #  └── PID
+        #      ├── xml
+        #      │   └── R[7桁連番].xml※XMLデータ
+        #      └── img
+        #          └── R[7桁連番]_pp.jp2※画像データ
+        for input_data in [eval_cfg['input_pred_data'], eval_cfg['input_gt_data']]:
+            if not os.path.isdir(input_data):
+                print('[ERROR] Input diretctory {} not found.'.format(input_data), file=sys.stderr)
+                return None
+    else:
+        print('[ERROR] Unexpected input directory structure type: {0}.'.format(eval_cfg['input_structure']), file=sys.stderr)
+        return None
+
+    return eval_cfg
 
 
 def save_xml(xml_to_save, path):

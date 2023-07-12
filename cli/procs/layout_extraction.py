@@ -1,10 +1,12 @@
-# Copyright (c) 2022, National Diet Library, Japan
+# Copyright (c) 2023, National Diet Library, Japan
 #
 # This software is released under the CC BY 4.0.
 # https://creativecommons.org/licenses/by/4.0/
 
 
 import copy
+import xml.etree.ElementTree as ET
+import lxml
 import numpy
 
 from .base_proc import BaseInferenceProcess
@@ -25,9 +27,9 @@ class LayoutExtractionProcess(BaseInferenceProcess):
             実行される順序を表す数値。
         """
         super().__init__(cfg, pid, '_layer_ext')
-        from src.ndl_layout.tools.process import InferencerWithCLI
+        from submodules.ndl_layout.tools.process_textblock import InferencerWithCLI
         self._inferencer = InferencerWithCLI(self.cfg['layout_extraction'])
-        self._run_src_inference = self._inferencer.inference_wich_cli
+        self._run_submodule_inference = self._inferencer.inference_with_cli
 
     def is_valid_input(self, input_data):
         """
@@ -65,14 +67,18 @@ class LayoutExtractionProcess(BaseInferenceProcess):
         """
         print('### Layout Extraction Process ###')
         output_data = copy.deepcopy(input_data)
-        inference_output = self._run_src_inference(img=input_data['img'],
-                                                   img_path=input_data['img_file_name'],
-                                                   score_thr=self.cfg['layout_extraction']['score_thr'],
-                                                   dump=(self.cfg['dump'] or self.cfg['save_image']))
+        inference_output = self._run_submodule_inference(
+            img=input_data['img'],
+            img_path=input_data['img_file_name'],
+            score_thr=self.cfg['layout_extraction']['score_thr'],
+            dump=(self.cfg['dump'] or self.cfg['save_image'])
+        )
 
         # Create result to pass xml and img data
         result = []
-        output_data['xml'] = inference_output['xml']
+        output_data['xml'] = ET.ElementTree(
+            ET.fromstring(lxml.etree.tostring(inference_output['xml']))
+        )
         if inference_output['dump_img'] is not None:
             output_data['dump_img'] = inference_output['dump_img']
         result.append(output_data)

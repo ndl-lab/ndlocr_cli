@@ -1,0 +1,6 @@
+iou_thresh: 0.5
+correct_line_ocr_log: False
+eval_main_text_only: False
+eval_annotation_line_order: False
+ignore_inline_type_to_skip: False
+eval_all_valid_pred_line: False
