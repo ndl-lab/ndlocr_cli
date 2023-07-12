@@ -1,14 +1,12 @@
-# ndlocr_cli(NDLOCR(ver.2.0)アプリケーションのリポジトリ)
+# ndlocr_cli(NDLOCR(ver.2.1)アプリケーションのリポジトリ)
 
 NDLOCR(ver.2)を利用してテキスト化を実行するためのアプリケーションを提供するリポジトリです。 
 
-本プログラムは、全文検索用途のテキスト化のために開発した[ver.1](https://github.com/ndl-lab/ndlocr_cli/tree/ver.1)に対して、視覚障害者等の読み上げ用途にも利用できるよう、国立国会図書館が外部委託して追加開発したプログラムです（委託業者：株式会社モルフォAIソリューションズ）。
+本プログラムは、令和4年度NDLOCR追加開発事業の成果物である[ver.2.0](https://github.com/ndl-lab/ndlocr_cli/tree/ver.2.0)に対して、国立国会図書館が改善作業を行ったプログラムです。
 
 事業の詳細については、[令和4年度NDLOCR追加開発事業及び同事業成果に対する改善作業](https://lab.ndl.go.jp/data_set/r4ocr/r4_software/)をご覧ください。
 
 本プログラムは、国立国会図書館がCC BY 4.0ライセンスで公開するものです。詳細については LICENSEをご覧ください。
-
-**本プログラムをもとに国立国会図書館が更に改善を行ったプログラム[ver.2.1](https://github.com/ndl-lab/ndlocr_cli/tree/ver.2.1)についても提供しています。**
 
 **2023年6月まで公開していたバージョンを継続して利用したい場合には、[ver.1](https://github.com/ndl-lab/ndlocr_cli/tree/ver.1)をご利用ください。**
 
