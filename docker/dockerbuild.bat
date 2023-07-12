@@ -21,15 +21,6 @@ curl -o %FULLPATH% %URL%
 )
 
 set DIRNAME=src\ndl_layout\models\
-set FILENAME=ndl_layout_config.py
-set URL="https://lab.ndl.go.jp/dataset/ndlocr/ndl_layout/ndl_layout_config.py"
-set FULLPATH=%DIRNAME%%FILENAME%
-if not exist %DIRNAME%%FILENAME% (
-mkdir %DIRNAME%
-curl -o %FULLPATH% %URL%
-)
-
-set DIRNAME=src\ndl_layout\models\
 set FILENAME=epoch_140_all_eql_bt.pth
 set URL="https://lab.ndl.go.jp/dataset/ndlocr/ndl_layout/epoch_140_all_eql_bt.pth"
 set FULLPATH=%DIRNAME%%FILENAME%
