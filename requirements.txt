@@ -17,5 +17,5 @@ pytorch-lightning==1.6.5
 pyyaml
 rich
 scikit-image==0.16.2
-scikit-learn
+scikit-learn==1.2.2
 wheel
