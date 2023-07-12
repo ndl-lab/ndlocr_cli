@@ -27,7 +27,7 @@ layout_extraction:
   score_thr: 0.3
 line_ocr:
   char_list: 'submodules/text_recognition_lightning/ndldata/mojilist_NDL.txt'
-  saved_model: 'submodules/text_recognition_lightning/model/resnet-orient2.ckpt'
+  saved_model: 'submodules/text_recognition_lightning/models/resnet-orient2.ckpt'
   additional_elements:
     柱: True
     ノンブル: True
@@ -37,5 +37,5 @@ ruby_read: True
 line_attribute:
   add_title_author: True
   classifier: 'rf'
-  title_model: 'submodules/text_recognition_lightning/model/rf_title/model.pkl'
-  author_model: 'submodules/text_recognition_lightning/model/rf_author/model.pkl'
+  title_model: 'submodules/text_recognition_lightning/models/rf_title/model.pkl'
+  author_model: 'submodules/text_recognition_lightning/models/rf_author/model.pkl'
