@@ -31,7 +31,7 @@ RUN set -x && apt -y install libglib2.0-0
 RUN set -x && apt -y install libgl1-mesa-dev
 RUN set -x && apt -y install vim git
 
-RUN set -x && pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 -f https://download.pytorch.org/whl/cu111/torch_stable.html
+RUN set -x && pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118
 
 RUN set -x \
     && pip install yaspin tqdm \
@@ -65,18 +65,18 @@ COPY submodules/separate_pages_mmdet ${PROJECT_DIR}/submodules/separate_pages_mm
 COPY submodules/text_recognition_lightning ${PROJECT_DIR}/submodules/text_recognition_lightning
 
 RUN set -x \
+    && pip install -r ${PROJECT_DIR}/submodules/ruby_prediction/requirements.txt
+
+
+RUN set -x \
     && cd ${PROJECT_DIR}/submodules/ndl_layout \
-    && git clone https://github.com/open-mmlab/mmdetection.git -b v2.28.2 \
+    && git clone https://github.com/open-mmlab/mmdetection.git -b v3.0.0 \
     && cd ${PROJECT_DIR}/submodules/ndl_layout/mmdetection \
     && sed -i -e 's/GPU_MEM_LIMIT = 1024\*\*3/GPU_MEM_LIMIT = 1024\*\*3\/\/5/' mmdet/models/roi_heads/mask_heads/fcn_mask_head.py \
     && python setup.py bdist_wheel \
     && pip install dist/*.whl
 
-RUN set -x \
-    && pip install -r ${PROJECT_DIR}/submodules/ruby_prediction/requirements.txt
 
-RUN set -x && pip install mmcv==1.4.2 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.10/index.html
-RUN set -x && pip install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.10/index.html
-
+RUN set -x && pip install mmcv==2.0.0 -f https://download.openmmlab.com/mmcv/dist/cu118/torch2.0/index.html
 
 WORKDIR ${PROJECT_DIR}
