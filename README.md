@@ -24,7 +24,7 @@ OCRを実現するための各機能はhttps://github.com/ndl-lab
 
 リポジトリをclone する際は、次のコマンドを実行すると、関連リポジトリを一度に取得することができます。
 ```
-git clone --recursive https://github.com/ndl-lab/ndlocr_cli
+git clone -b ver.2.0 --recursive https://github.com/ndl-lab/ndlocr_cli
 ```
 ### 2. ホストマシンのNVIDIA Driverのアップデート
 コンテナ内でCUDA 11.1を利用します。
