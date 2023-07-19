@@ -14,7 +14,7 @@ NDLOCRを利用してテキスト化を実行するためのアプリケーシ�
 
 及び
 
-**ver.2.0をもとに国立国会図書館が更に改善を行った[NDLOCR ver.2.1](https://github.com/ndl-lab/)についても提供しています。**
+**ver.2.0をもとに国立国会図書館が更に改善を行った[NDLOCR ver.2.1](https://github.com/ndl-lab/ndlocr_cli_r4)についても提供しています。**
 
  
 ## 環境構築
