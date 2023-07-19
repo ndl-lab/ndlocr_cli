@@ -9,6 +9,11 @@ NDLOCR(ver.2)を利用してテキスト化を実行するためのアプリケ�
 本プログラムは、国立国会図書館がCC BY 4.0ライセンスで公開するものです。詳細については LICENSEをご覧ください。
 
 **2023年6月まで公開していたバージョンを継続して利用したい場合には、[ver.1](https://github.com/ndl-lab/ndlocr_cli/tree/ver.1)をご利用ください。**
+```
+git clone --recursive https://github.com/ndl-lab/ndlocr_cli -b ver.1
+```
+のようにソースコード取得部分を書き換えることで継続してお使いいただけます。
+
 
 ## 環境構築
 
