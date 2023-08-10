@@ -30,7 +30,7 @@ OCRを実現するための各機能はhttps://github.com/ndl-lab
 git clone --recursive https://github.com/ndl-lab/ndlocr_cli
 ```
 ### 2. ホストマシンのNVIDIA Driverのアップデート
-コンテナ内でCUDA 11.8を利用します。
+コンテナ内でCUDA 11.1を利用します。
 
 ホストマシンのNVIDIA Driverが
 
