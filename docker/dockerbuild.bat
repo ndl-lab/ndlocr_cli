@@ -2,7 +2,7 @@ SET TAG=ocr-v2-cli-py38
 SET DOCKERIGNORE=docker\dockerignore
 SET DOCKERFILE=docker\Dockerfile
 
-set DIRNAME=submodules\text_recognition_lightning\models\models\
+set DIRNAME=submodules\text_recognition_lightning\models\
 set FILENAME=resnet-orient2.ckpt
 set URL="https://lab.ndl.go.jp/dataset/ndlocr_v2/text_recognition_lightning/resnet-orient2.ckpt"
 set FULLPATH=%DIRNAME%%FILENAME%
@@ -11,7 +11,7 @@ mkdir %DIRNAME%
 curl -o %FULLPATH% %URL%
 )
 
-set DIRNAME=submodules\text_recognition_lightning\models\models\rf_author\
+set DIRNAME=submodules\text_recognition_lightning\models\rf_author\
 set FILENAME=model.pkl
 set URL="https://lab.ndl.go.jp/dataset/ndlocr_v2/text_recognition_lightning/rf_author/model.pkl"
 set FULLPATH=%DIRNAME%%FILENAME%
@@ -20,7 +20,7 @@ mkdir %DIRNAME%
 curl -o %FULLPATH% %URL%
 )
 
-set DIRNAME=submodules\text_recognition_lightning\models\models\rf_title\
+set DIRNAME=submodules\text_recognition_lightning\models\rf_title\
 set FILENAME=model.pkl
 set URL="https://lab.ndl.go.jp/dataset/ndlocr_v2/text_recognition_lightning/rf_title/model.pkl"
 set FULLPATH=%DIRNAME%%FILENAME%
