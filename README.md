@@ -34,21 +34,22 @@ git clone --recursive https://github.com/ndl-lab/ndlocr_cli
 
 ホストマシンのNVIDIA Driverが
 
-Linuxの場合: 455.23以上 
+Linuxの場合: 450.36.06以上 
 
-Windowsの場合:456.38以上
+Windowsの場合:520.06以上
 
 のバージョンを満たさない場合は、ご利用のGPUに対応するドライバの更新を行ってください。
 
 （参考情報）
 
-以下の環境で動作確認を行っています。
+以下のホストマシン環境（AWS g5.xlargeインスタンス）上で動作確認を行っています。
 
-OS: Ubuntu 18.04.5 LTS
+OS: Ubuntu 18.04.6 LTS
 
-GPU: GeForce RTX 2080Ti
+GPU: NVIDIA A10G
 
-NVIDIA Driver: 455.23.05
+NVIDIA Driver: 470.182.03
+
 
 
 ### 3. dockerのインストール
