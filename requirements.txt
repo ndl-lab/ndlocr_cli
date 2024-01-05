@@ -5,7 +5,7 @@ hydra-colorlog==1.2.0
 hydra-core==1.2.0
 joblib
 lmdb==1.2.1
-lxml
+lxml==4.9.3
 mmcls==1.0.0rc6
 nltk==3.6.2
 numpy==1.23.1
