@@ -78,7 +78,7 @@ Linux:
 
 例：/home/user/tmpdirの直下に画像ファイルがある場合
 ```
-docker run --gpus all -d --rm --name ocr_cli_runner -v /home/user/tmpdir:/root/tmpdir/img -i ocr-v2-cli-py37:latest
+docker run --gpus all -d --rm --name ocr_cli_runner -v /home/user/tmpdir:/root/tmpdir/img -i ocr-v2-cli-py38:latest
 ```
 
 
