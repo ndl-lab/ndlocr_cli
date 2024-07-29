@@ -23,7 +23,8 @@ RUN set -x \
     && ln -s /usr/bin/python3.8 /usr/bin/python \
     && apt -y install wget python3-distutils \
     && wget https://bootstrap.pypa.io/get-pip.py \
-    && python get-pip.py
+    && python get-pip.py \
+    && python -m pip install --upgrade pip==24.0
 
 ENV TZ=Asia/Tokyo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
