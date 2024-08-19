@@ -6,7 +6,7 @@ hydra-core==1.2.0
 joblib
 lmdb==1.2.1
 lxml==4.9.3
-mmcls==1.0.0rc6
+mmpretrain==1.2.0
 nltk==3.6.2
 numpy==1.23.1
 omegaconf
