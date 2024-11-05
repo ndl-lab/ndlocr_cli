@@ -21,7 +21,7 @@
 [submodule "submodules/ndl_layout"]
 	path = submodules/ndl_layout
 	url = https://github.com/ndl-lab/ndl_layout
-	branch = feature/colab
+	branch = feature/ver.2.1-pytorch2.0
 [submodule "submodules/reading_order"]
 	path = submodules/reading_order
 	url = https://github.com/ndl-lab/reading_order
