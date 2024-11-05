@@ -8,8 +8,8 @@ import json
 import os
 import sys
 
-from cli.core import OcrInferrer, OcrResultEvaluator
-from cli.core import utils
+from ocrcli.core import OcrInferrer, OcrResultEvaluator
+from ocrcli.core import utils
 
 
 @click.group()
