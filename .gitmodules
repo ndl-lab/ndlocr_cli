@@ -21,7 +21,7 @@
 [submodule "submodules/ndl_layout"]
 	path = submodules/ndl_layout
 	url = https://github.com/ndl-lab/ndl_layout
-	branch = feature/ver.2.1-pytorch2.0
+	branch = feature/colab
 [submodule "submodules/reading_order"]
 	path = submodules/reading_order
 	url = https://github.com/ndl-lab/reading_order
@@ -33,4 +33,4 @@
 [submodule "submodules/text_recognition_lightning"]
 	path = submodules/text_recognition_lightning
 	url = https://github.com/ndl-lab/text_recognition_lightning
-	branch = master
+	branch = feature/colab
