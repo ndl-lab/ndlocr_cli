@@ -34,6 +34,17 @@ RUN set -x && apt -y install vim git
 
 RUN set -x && pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 -f https://download.pytorch.org/whl/cu111/torch_stable.html
 
+# Install Rust (required for sudachipy)
+RUN set -x \
+    && apt update \
+    && apt install -y curl build-essential \
+    && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
+    && . $HOME/.cargo/env \
+    && echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+
+# Ensure Rust is on PATH
+ENV PATH="/root/.cargo/bin:${PATH}"
+
 RUN set -x \
     && pip install yaspin tqdm \
     && pip install setuptools==59.5.0 \
