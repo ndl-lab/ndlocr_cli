@@ -34,7 +34,7 @@ RUN set -x && apt -y install vim git
 RUN set -x && pip install torch==2.0.0+cu118 torchvision==0.15.1+cu118 torchaudio==2.0.1 --index-url https://download.pytorch.org/whl/cu118
 
 RUN set -x \
-    && pip install yaspin tqdm \
+    && pip install yaspin tqdm SudachiPy==0.6.9 \
     && pip install setuptools==59.5.0 \
     && pip install transformers['ja']
 
