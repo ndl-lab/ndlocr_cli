@@ -25,7 +25,7 @@ sys.path.append(str(currentdir) + "/../../src/deskew_HT")
 sys.path.append(str(currentdir) + "/../../src/text_recognition")
 
 # supported image type list
-supported_img_ext = ['.jpg', '.jpeg', '.jp2']
+supported_img_ext = ['.jpg', '.jpeg', '.jp2','.png','.tiff','.bmp','.tif','.JPG','.PNG']
 
 
 class OcrInferencer:
