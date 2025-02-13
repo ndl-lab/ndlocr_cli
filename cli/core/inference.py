@@ -26,7 +26,7 @@ sys.path.append(str(currentdir) + "/../../submodules/text_recognition_lightning"
 sys.path.append(str(currentdir) + "/../../submodules/reading_order")
 
 # supported image type list
-supported_img_ext = ['.jpg', '.jpeg', '.jp2']
+supported_img_ext = ['.jpg', '.jpeg', '.jp2','.png','.tiff','.bmp','.tif','.JPG','.PNG']
 
 
 class OcrInferrer:
