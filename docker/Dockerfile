@@ -22,7 +22,7 @@ RUN set -x \
     && apt -y install python3.8 python3.8-dev \
     && ln -s /usr/bin/python3.8 /usr/bin/python \
     && apt -y install wget python3-distutils \
-    && wget https://bootstrap.pypa.io/get-pip.py \
+    && wget https://bootstrap.pypa.io/pip/3.8/get-pip.py \
     && python get-pip.py \
     && python -m pip install --upgrade pip==24.0
 
