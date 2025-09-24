@@ -28,7 +28,6 @@ sys.path.append(str(currentdir) + "/../../submodules/reading_order")
 # supported image type list
 supported_img_ext = ['.jpg', '.jpeg', '.jp2','.png','.tiff','.bmp','.tif','.JPG','.PNG']
 
-
 class OcrInferrer:
     """
     推論実行時の関数や推論の設定値を保持します。

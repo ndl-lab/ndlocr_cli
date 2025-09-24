@@ -1,4 +1,4 @@
-TAG=ocr-v2-cli-py38
+TAG=ocr-v2-cli-py310
 DOCKERIGNORE=docker/dockerignore
 DOCKERFILE=docker/Dockerfile
 wget -nc https://lab.ndl.go.jp/dataset/ndlocr_v2/text_recognition_lightning/resnet-orient2.ckpt -P ./submodules/text_recognition_lightning/models
