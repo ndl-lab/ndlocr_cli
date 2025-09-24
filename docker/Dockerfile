@@ -1,4 +1,4 @@
-FROM nvcr.io/nvidia/cuda:11.1.1-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:12.1.1-cudnn8-devel-ubuntu22.04
 
 ENV PROJECT_DIR=/root/ocr_cli
 ENV FORCE_CUDA="1"
@@ -18,25 +18,12 @@ ENV LANGUAGE ja_JP:ja
 ENV LC_ALL=ja_JP.UTF-8
 RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
 
-RUN set -x \
-    && apt -y install python3.8 python3.8-dev \
-    && ln -s /usr/bin/python3.8 /usr/bin/python \
-    && apt -y install wget python3-distutils \
-    && wget https://bootstrap.pypa.io/get-pip.py \
-    && python get-pip.py
+RUN set -x && apt -y install libgl1-mesa-dev libglib2.0-0 zip git python3-pip wget
 
 ENV TZ=Asia/Tokyo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
-RUN set -x && apt -y install libglib2.0-0
-RUN set -x && apt -y install libgl1-mesa-dev
-RUN set -x && apt -y install vim git
 
-RUN set -x && pip install torch==1.10.1+cu111 torchvision==0.11.2+cu111 -f https://download.pytorch.org/whl/cu111/torch_stable.html
-
-RUN set -x \
-    && pip install yaspin tqdm SudachiPy==0.6.9 \
-    && pip install setuptools==59.5.0 \
-    && pip install transformers['ja']
+RUN set -x && pip3 install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 torchtext==0.16.1 --index-url https://download.pytorch.org/whl/cu121
 
 RUN set -x \
     && wget http://www.phontron.com/kytea/download/kytea-0.4.7.tar.gz \
@@ -64,19 +51,11 @@ COPY submodules/ruby_prediction ${PROJECT_DIR}/submodules/ruby_prediction
 COPY submodules/separate_pages_mmdet ${PROJECT_DIR}/submodules/separate_pages_mmdet
 COPY submodules/text_recognition_lightning ${PROJECT_DIR}/submodules/text_recognition_lightning
 
-RUN set -x \
-    && cd ${PROJECT_DIR}/submodules/ndl_layout \
-    && git clone https://github.com/open-mmlab/mmdetection.git -b v2.28.2 \
-    && cd ${PROJECT_DIR}/submodules/ndl_layout/mmdetection \
-    && sed -i -e 's/GPU_MEM_LIMIT = 1024\*\*3/GPU_MEM_LIMIT = 1024\*\*3\/\/5/' mmdet/models/roi_heads/mask_heads/fcn_mask_head.py \
-    && python setup.py bdist_wheel \
-    && pip install dist/*.whl
 
 RUN set -x \
-    && pip install -r ${PROJECT_DIR}/submodules/ruby_prediction/requirements.txt
+    && pip3 install mmdet==3.3.0\
+    && pip3 install -r ${PROJECT_DIR}/submodules/ruby_prediction/requirements.txt
 
-RUN set -x && pip install mmcv==1.4.2 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.10/index.html
-RUN set -x && pip install mmcv-full==1.7.0 -f https://download.openmmlab.com/mmcv/dist/cu111/torch1.10/index.html
-
+RUN set -x && pip3 install mmcv==2.1.0 -f https://download.openmmlab.com/mmcv/dist/cu121/torch2.1/index.html
 
 WORKDIR ${PROJECT_DIR}
