@@ -25,7 +25,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN set -x && pip3 install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 torchtext==0.16.1 --index-url https://download.pytorch.org/whl/cu121
 
-
 RUN set -x \
     && wget http://www.phontron.com/kytea/download/kytea-0.4.7.tar.gz \
     && tar xzvf kytea-0.4.7.tar.gz \
