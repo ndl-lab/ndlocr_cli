@@ -18,10 +18,12 @@ ENV LANGUAGE ja_JP:ja
 ENV LC_ALL=ja_JP.UTF-8
 RUN localedef -f UTF-8 -i ja_JP ja_JP.utf8
 
+
 RUN set -x && apt -y install libgl1-mesa-dev libglib2.0-0 zip git python3-pip wget
 
 ENV TZ=Asia/Tokyo
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 
 RUN set -x && pip3 install torch==2.1.1 torchvision==0.16.1 torchaudio==2.1.1 torchtext==0.16.1 --index-url https://download.pytorch.org/whl/cu121
 

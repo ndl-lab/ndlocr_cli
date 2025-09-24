@@ -1,4 +1,5 @@
 # ndlocr_cli(NDLOCR(ver.2.1)アプリケーションのリポジトリ)
+**2025/09/24 Docker環境を更新しました**
 
 NDLOCR(ver.2)を利用してテキスト化を実行するためのアプリケーションを提供するリポジトリです。 
 
@@ -78,7 +79,7 @@ Linux:
 
 例：/home/user/tmpdirの直下に画像ファイルがある場合
 ```
-docker run --gpus all -d --rm --name ocr_cli_runner -v /home/user/tmpdir:/root/tmpdir/img -i ocr-v2-cli-py37:latest
+docker run --gpus all -d --rm --name ocr_cli_runner -v /home/user/tmpdir:/root/tmpdir/img -i ocr-v2-cli-py38:latest
 ```
 
 
